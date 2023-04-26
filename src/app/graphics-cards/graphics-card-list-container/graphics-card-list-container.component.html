@@ -1,0 +1,45 @@
+<div class="list-container">
+  <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+  <div class="list-header">
+    <h2>Graphics Cards</h2>
+    <div class="search-container">
+      <div class="search">
+        <form [formGroup]="form">
+          <div class="search-wrapper">
+            <div
+              class="search-container"
+              fxFlex
+              fxLayout="row"
+              fxLayoutAlign="start center"
+            >
+              <mat-icon>search</mat-icon>
+              <input
+                type="text"
+                name="search"
+                placeholder="Search by name, model"
+                formControlName="search"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <cdk-virtual-scroll-viewport
+    itemSize="70"
+    class="list"
+    (scrolledIndexChange)="onScroll($event)"
+  >
+    <div
+      *cdkVirtualFor="let card of graphicsCards$ | async"
+      class="list-item"
+      (dblclick)="goToDetail(card)"
+    >
+      <span><label>name:</label> {{ card.name }}</span>
+      <span><label>model:</label> {{ card.model }}</span>
+      <span><label>manufacturer:</label> {{ card.manufacturer }}</span>
+      <span><label>price:</label> {{ card.price }}</span>
+    </div>
+  </cdk-virtual-scroll-viewport>
+</div>
